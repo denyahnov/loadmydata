@@ -1,13 +1,24 @@
 import os
 
+def check_folder_exists(folder):
+	for i in os.listdir(os.getcwd()):
+		if i == folder: return True 
+	os.mkdir(os.getcwd()+'\\'+folder)
+	return False
+
+def check_file_exists(filename='',path=''):
+	for i in os.listdir(os.getcwd()+path):
+		if i == filename: return True
+	open(os.getcwd() + path + filename,'w')
+	return False
+
 def load_folder(data='',folder='',file_ext='',):
 	print(f'[+] Loading {data}...')
 
-	try:
-		listdir = os.listdir(folder)
-	except:
+	if check_folder_exists(folder):
+		listdir = os.listdir(os.getcwd()+'\\'+folder)
+	else:
 		print(f'[!] No {data.lower()} folder found\n[+] Creating Folder "{folder}"')
-		os.mkdir(folder)
 		listdir=[]
 
 	dirs = []
